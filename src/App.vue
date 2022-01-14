@@ -1,30 +1,34 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <Menu id="menu_gch"></Menu>
+  <div class="page">
+    <router-view v-slot="{ Component }"></router-view>
   </div>
-  <router-view/>
 </template>
 
+<script>
+import Menu from './components/Menu.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Menu
+  }
+}
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+html, body {
+  padding: 0;
+  margin: 0;
 }
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
 
-#nav {
-  padding: 30px;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#menu_gch{
+  position: absolute;
 }
 </style>
