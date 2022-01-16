@@ -4,6 +4,7 @@
       <Menu/>
     </div>
     <div class="page">
+      <Version style="margin-top: 1rem"/>
       <router-view v-slot="{ Component }"></router-view>
     </div>
   </div>
@@ -11,12 +12,17 @@
 </template>
 
 <script>
-import Menu from './components/Menu.vue'
-
+import Menu from './components/Menu.vue';
+import Version from './components/Version.vue';
 export default {
   name: 'App',
+  data(){
+    return {
+    }
+  },
   components: {
-    Menu
+    Menu,
+    Version,
   }
 }
 </script>
@@ -33,12 +39,15 @@ html, body {
   width: 100vw;
   display: flex;
   flex-direction: row;
+  color: white;
+  background: rgba(8, 8, 16, 0.81);
 }
 .page {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 0 1rem;
 
 }

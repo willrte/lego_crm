@@ -1,6 +1,7 @@
 <template>
   <div class="titre">
     <h1>Home</h1>
+
   </div>
 
 
@@ -11,7 +12,6 @@
 
 export default {
   name: 'Home',
-
 }
 </script>
 <style scoped>

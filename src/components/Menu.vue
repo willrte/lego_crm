@@ -74,7 +74,6 @@ export default {
 .menu{
   display: flex;
   flex-direction: column;
-  color: #000000;
   /*background-color: #c0c0c0;*/
   font-family: Arial;
   height: max-content;
@@ -101,14 +100,14 @@ export default {
 .menu-btn:hover{
   /*color: #ffffff;*/
   font-weight: bold;
-  border: #e89797 solid 1px;
+  border: white solid 1px;
   transition-duration: 0.3s;
 }
 
 .active{
   color: #ffffff;
   font-weight: bold;
-  background-color: #fa0000;
+  background-color: red;
   transition-duration: 0.3s;
 }
 </style>
