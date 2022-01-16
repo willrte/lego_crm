@@ -4,7 +4,6 @@
       <Menu/>
     </div>
     <div class="page">
-      <Version style="margin-top: 1rem"/>
       <router-view v-slot="{ Component }"></router-view>
     </div>
   </div>

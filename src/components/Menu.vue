@@ -2,21 +2,21 @@
   <div class="menu-container">
   <div class="menu">
     <div class="highlight"></div>
-    <div style="display: flex; align-items: center" class="menu-btn"  :class="{active: menuItem=== 'home'}" @click="$router.push('/'); setMenuItem('home'); setHighlightPosition()">
+    <div style="display: flex; align-items: center" class="menu-btn"  :class="{active: menuItem=== 'Home'}" @click="$router.push('/'); setMenuItem('Home'); setHighlightPosition()">
       <i class="fas fa-grip-horizontal" style="font-size: 25px"></i>
       &nbsp;&nbsp;
       <div>Home</div>
     </div>
 
-    <div class="menu-btn"  :class="{active: menuItem=== 'clients'}" @click="$router.push('/clients'); setMenuItem('clients');setHighlightPosition()">
+    <div class="menu-btn"  :class="{active: menuItem=== 'Clients'}" @click="$router.push('/clients'); setMenuItem('Clients');setHighlightPosition()">
       <i class="fas fa-users" style="font-size: 25px"></i>
       &nbsp;&nbsp;
       <div>Clients</div>
     </div>
-    <div class="menu-btn"  :class="{active: menuItem=== 'about'}" @click="$router.push('/about'); setMenuItem('about');setHighlightPosition()">
+    <div class="menu-btn"  :class="{active: menuItem=== 'Ventes'}" @click="$router.push('/ventes'); setMenuItem('Ventes');setHighlightPosition()">
       <i class="fas fa-file-signature" style="font-size: 25px"></i>
       &nbsp;&nbsp;
-      <div>About</div>
+      <div>Ventes</div>
     </div>
   </div>
   </div>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import Version from "@/components/Version";
 export default {
   name: 'Menu',
   data() {
@@ -31,16 +32,19 @@ export default {
       menuItem: "home",
     };
   },
+  components: {
+    Version
+  },
   methods: {
     setMenuItem(item) {
       this.menuItem = item;
     },
     setHighlightPosition() {
-      if (this.menuItem === "home") {
+      if (this.menuItem === "Home") {
         document.getElementsByClassName("highlight")[0].style.bottom = "33.2rem";
-      } else if (this.menuItem === "clients") {
+      } else if (this.menuItem === "Clients") {
         document.getElementsByClassName("highlight")[0].style.bottom = "24.1rem";
-      } else if (this.menuItem === "about") {
+      } else if (this.menuItem === "About") {
         document.getElementsByClassName("highlight")[0].style.bottom = "15rem";
       }
     },
