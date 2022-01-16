@@ -1,9 +1,23 @@
 <template>
   <div class="menu-container">
   <div class="menu">
-    <div class="menu-link" style="cursor: pointer" @click="$router.push('/')">Home</div><br>
-    <div class="menu-link" style="cursor: pointer" @click="$router.push('/clients')">Clients</div><br>
-    <div class="menu-link" style="cursor: pointer" @click="$router.push('/about')">About</div><br>
+    <div class="highlight"></div>
+    <div style="display: flex; align-items: center" class="menu-btn"  :class="{active: menuItem=== 'home'}" @click="$router.push('/'); setMenuItem('home'); setHighlightPosition()">
+      <i class="fas fa-grip-horizontal" style="font-size: 25px"></i>
+      &nbsp;&nbsp;
+      <div>Home</div>
+    </div>
+
+    <div class="menu-btn"  :class="{active: menuItem=== 'clients'}" @click="$router.push('/clients'); setMenuItem('clients');setHighlightPosition()">
+      <i class="fas fa-users" style="font-size: 25px"></i>
+      &nbsp;&nbsp;
+      <div>Clients</div>
+    </div>
+    <div class="menu-btn"  :class="{active: menuItem=== 'about'}" @click="$router.push('/about'); setMenuItem('about');setHighlightPosition()">
+      <i class="fas fa-file-signature" style="font-size: 25px"></i>
+      &nbsp;&nbsp;
+      <div>About</div>
+    </div>
   </div>
   </div>
 
@@ -12,44 +26,89 @@
 <script>
 export default {
   name: 'Menu',
+  data() {
+    return {
+      menuItem: "home",
+    };
+  },
+  methods: {
+    setMenuItem(item) {
+      this.menuItem = item;
+    },
+    setHighlightPosition() {
+      if (this.menuItem === "home") {
+        document.getElementsByClassName("highlight")[0].style.bottom = "33.2rem";
+      } else if (this.menuItem === "clients") {
+        document.getElementsByClassName("highlight")[0].style.bottom = "24.1rem";
+      } else if (this.menuItem === "about") {
+        document.getElementsByClassName("highlight")[0].style.bottom = "15rem";
+      }
+    },
+  },
 }
+
 </script>
 
 
 <style scoped>
+/*.highlight{*/
+/*  position: absolute;*/
+/*  bottom: 33.5rem;*/
+/*  width: 8rem;*/
+/*  height: 8rem;*/
+/*  background-color: #e89797;*/
+/*  margin: 0.5rem;*/
+/*  transition: all 0.4s ease-in-out;*/
+/*  border-radius: 100px;*/
+/*  z-index: -1;*/
+/*  border: #e89797 solid 1px;*/
+/*}*/
 .menu-container{
   margin-left: 2rem;
   display: flex;
   height: 100%;
-  width: 5rem;
+  width: max-content;
   align-items: center;
-  justify-content: center;
+
 }
 .menu{
   display: flex;
   flex-direction: column;
   color: #000000;
-  background-color: #c0c0c0;
-  justify-content: center;
-  align-items: center;
+  /*background-color: #c0c0c0;*/
   font-family: Arial;
-  height: 15rem;
-  width: 5rem;
-  border-radius: 10px;
+  height: max-content;
+  width: max-content;
+  border-radius:100px;
+  z-index: 9;
+
 
 }
-.menu-link{
+.menu-btn{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5rem !important;
-  width: 5rem !important;
-  border-radius: 10px;
+  height: 4rem ;
+  width: 6rem ;
+  cursor: pointer;
+  border-radius: 1rem;
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
+  border: transparent solid 1px;
+  font-weight: bold;
+
 }
-.menu-link:hover{
+.menu-btn:hover{
+  /*color: #ffffff;*/
+  font-weight: bold;
+  border: #e89797 solid 1px;
+  transition-duration: 0.3s;
+}
+
+.active{
   color: #ffffff;
   font-weight: bold;
-  background-color: #858585;
-  transition-duration: 0.6s;
+  background-color: #fa0000;
+  transition-duration: 0.3s;
 }
 </style>

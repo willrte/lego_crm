@@ -1,8 +1,13 @@
 <template>
-  <Menu id="menu_gch"></Menu>
-  <div class="page">
-    <router-view v-slot="{ Component }"></router-view>
+  <div class="app">
+    <div class="menu">
+      <Menu/>
+    </div>
+    <div class="page">
+      <router-view v-slot="{ Component }"></router-view>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -20,15 +25,19 @@ html, body {
   padding: 0;
   margin: 0;
 }
+.app{
+
+  display: flex;
+  flex-direction: row;
+}
 .page {
-  width: 100%;
-  height: 100%;
+  width: available;
+  height: available;
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
 
 }
-#menu_gch{
-  position: absolute;
-}
+
+
 </style>
