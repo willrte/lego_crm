@@ -1,5 +1,6 @@
 <template>
   <div class="menu-container">
+    <Version/>
   <div class="menu">
     <div class="highlight"></div>
     <div style="display: flex; align-items: center" class="menu-btn"  :class="{active: menuItem=== 'Home'}" @click="$router.push('/'); setMenuItem('Home'); setHighlightPosition()">
@@ -68,11 +69,13 @@ export default {
 /*  border: #e89797 solid 1px;*/
 /*}*/
 .menu-container{
-  margin-left: 2rem;
+  margin-left: 1rem;
   display: flex;
+  flex-direction: column;
   height: 100%;
   width: max-content;
   align-items: center;
+  justify-content: center;
 
 }
 .menu{

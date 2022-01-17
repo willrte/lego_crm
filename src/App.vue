@@ -3,7 +3,7 @@
     <div class="menu">
       <Menu/>
     </div>
-    <div class="page">
+    <div class="pageActive">
       <router-view v-slot="{ Component }"></router-view>
     </div>
   </div>
@@ -41,7 +41,7 @@ html, body {
   color: white;
   background: rgba(8, 8, 16, 0.81);
 }
-.page {
+.pageActive {
   width: 100%;
   height: 100%;
   display: flex;
