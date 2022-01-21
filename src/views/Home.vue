@@ -36,7 +36,7 @@ display: flex;
   display: flex;
   width: 100%;
   height: 100%;
-  background: #939393;
+  background: #161a28;
   margin-bottom: 1rem;
   border-radius: 20px;
 }

@@ -4,8 +4,10 @@
       <Menu/>
     </div>
     <div class="pageActive">
+
       <router-view v-slot="{ Component }"></router-view>
     </div>
+
   </div>
 
 </template>
@@ -38,8 +40,9 @@ html, body {
   width: 100vw;
   display: flex;
   flex-direction: row;
-  color: white;
-  background: rgba(8, 8, 16, 0.81);
+  color: #ffffff;
+  background: #252f46;
+
 }
 .pageActive {
   width: 100%;

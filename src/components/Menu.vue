@@ -1,55 +1,41 @@
 <template>
   <div class="menu-container">
-    <Version/>
-  <div class="menu">
-    <div class="highlight"></div>
-    <div style="display: flex; align-items: center" class="menu-btn"  :class="{active: menuItem=== 'Home'}" @click="$router.push('/'); setMenuItem('Home'); setHighlightPosition()">
-      <i class="fas fa-grip-horizontal" style="font-size: 25px"></i>
-      &nbsp;&nbsp;
-      <div>Home</div>
-    </div>
 
-    <div class="menu-btn"  :class="{active: menuItem=== 'Clients'}" @click="$router.push('/clients'); setMenuItem('Clients');setHighlightPosition()">
-      <i class="fas fa-users" style="font-size: 25px"></i>
-      &nbsp;&nbsp;
-      <div>Clients</div>
+    <div class="menu">
+      <div class="menu-btn" :class="{active: $route.name=== 'Home'}" @click="$router.push('/');">
+        <i class="fas fa-grip-horizontal" style="font-size: 25px"></i>
+        &nbsp;&nbsp;
+        <div>Home</div>
+      </div>
+
+      <div class="menu-btn" :class="{active: $route.name=== 'Clients'}" @click="$router.push('/clients');">
+        <i class="fas fa-users" style="font-size: 25px"></i>
+        &nbsp;&nbsp;
+        <div>Clients</div>
+      </div>
+      <div class="menu-btn" :class="{active: $route.name=== 'Ventes'}" @click="$router.push('/ventes');">
+        <i class="fas fa-file-signature" style="font-size: 25px"></i>
+        &nbsp;&nbsp;
+        <div>Ventes</div>
+      </div>
     </div>
-    <div class="menu-btn"  :class="{active: menuItem=== 'Ventes'}" @click="$router.push('/ventes'); setMenuItem('Ventes');setHighlightPosition()">
-      <i class="fas fa-file-signature" style="font-size: 25px"></i>
-      &nbsp;&nbsp;
-      <div>Ventes</div>
-    </div>
-  </div>
+    <Version style="margin-bottom:1rem " />
   </div>
 
 </template>
 
 <script>
 import Version from "@/components/Version";
+
 export default {
   name: 'Menu',
   data() {
-    return {
-      menuItem: "home",
-    };
+    return {};
   },
   components: {
     Version
   },
-  methods: {
-    setMenuItem(item) {
-      this.menuItem = item;
-    },
-    setHighlightPosition() {
-      if (this.menuItem === "Home") {
-        document.getElementsByClassName("highlight")[0].style.bottom = "33.2rem";
-      } else if (this.menuItem === "Clients") {
-        document.getElementsByClassName("highlight")[0].style.bottom = "24.1rem";
-      } else if (this.menuItem === "About") {
-        document.getElementsByClassName("highlight")[0].style.bottom = "15rem";
-      }
-    },
-  },
+  methods: {},
 }
 
 </script>
@@ -68,7 +54,7 @@ export default {
 /*  z-index: -1;*/
 /*  border: #e89797 solid 1px;*/
 /*}*/
-.menu-container{
+.menu-container {
   margin-left: 1rem;
   display: flex;
   flex-direction: column;
@@ -78,43 +64,49 @@ export default {
   justify-content: center;
 
 }
-.menu{
+
+.menu {
   display: flex;
   flex-direction: column;
   /*background-color: #c0c0c0;*/
   font-family: Arial;
   height: max-content;
   width: max-content;
-  border-radius:100px;
+  border-radius: 100px;
   z-index: 9;
+  margin: auto 0;
 
 
 }
-.menu-btn{
+
+.menu-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 4rem ;
-  width: 6rem ;
+  min-height: 2.5rem;
+  max-height: max-content;
+  min-width: max-content;
   cursor: pointer;
-  border-radius: 1rem;
-  margin: 0.5rem 0;
-  padding: 0 0.5rem;
-  border: transparent solid 1px;
+  border-radius: 0.5rem;
+  margin: 0.2rem 1rem;
+  padding: 0 1rem;
+  border: transparent solid 2px;
   font-weight: bold;
 
 }
-.menu-btn:hover{
+
+.menu-btn:hover {
   /*color: #ffffff;*/
   font-weight: bold;
-  border: white solid 1px;
+  border: white solid 2px;
   transition-duration: 0.3s;
 }
 
-.active{
+.active {
   color: #ffffff;
   font-weight: bold;
-  background-color: red;
   transition-duration: 0.3s;
+  border: red solid 2px;
+
 }
 </style>
