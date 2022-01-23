@@ -12,7 +12,7 @@ export default {
   name: 'Version',
   data () {
     return {
-      appVersion: '0.1'
+      appVersion: '0.2'
     }
   }
 }
