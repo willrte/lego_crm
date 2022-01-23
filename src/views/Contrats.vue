@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="titre">
-      <p style="font-size: 30px; font-weight: bold">Home</p>
+      <p style="font-size: 30px; font-weight: bold">Contrats</p>
     </div>
     <div class="content">
 
@@ -14,12 +14,12 @@
 <script>
 
 export default {
-  name: 'Home',
+  name: 'Ventes',
 }
 </script>
 <style scoped>
 .page {
-display: flex;
+  display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;

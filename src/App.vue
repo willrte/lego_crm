@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="menu">
-      <Menu/>
+      <Menu :login_status="login_status_test" :nom="nom" :prenom="prenom" :poste="poste"/>
     </div>
     <div class="pageActive">
 
@@ -19,6 +19,10 @@ export default {
   name: 'App',
   data(){
     return {
+      login_status_test: 'Connexion',
+      nom: 'Caron',
+      prenom: 'Théo',
+      poste: 'UX/UI Designer',
     }
   },
   components: {
@@ -34,6 +38,7 @@ html, body {
   height: 100%;
   width: 100%;
   font-family: Poppins;
+  -webkit-tap-highlight-color: transparent;
 }
 .app{
   height: 100vh;
@@ -41,7 +46,7 @@ html, body {
   display: flex;
   flex-direction: row;
   color: #ffffff;
-  background: #252f46;
+  background: #29292a;
 
 }
 .pageActive {

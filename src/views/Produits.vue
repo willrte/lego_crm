@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="titre">
-      <p style="font-size: 30px; font-weight: bold">Ventes</p>
+      <p style="font-size: 30px; font-weight: bold">Produits</p>
     </div>
     <div class="content">
 
@@ -14,7 +14,7 @@
 <script>
 
 export default {
-  name: 'Ventes',
+  name: 'Clients',
 }
 </script>
 <style scoped>
@@ -36,8 +36,7 @@ export default {
   display: flex;
   width: 100%;
   height: 100%;
-  background: #ffffff;
+  border:1px solid #161a28;
   margin-bottom: 1rem;
-  border-radius: 20px;
 }
 </style>
