@@ -12,7 +12,7 @@
           {{ poste }}
         </div>
       </div>
-      <span class="span-user" ></span>
+      <span class="span-user"></span>
 
       <div class="menu">
         <div class="menu-btn" :class="{active: $route.name=== 'Home'}" @click="$router.push('/');">
@@ -28,26 +28,29 @@
           &nbsp;&nbsp;
           <span class="span-active" :class="{span_visibility: $route.name=== 'Contrats'}"></span>
         </div>
-        <div  class="menu-btn" :class="{active: $route.name=== 'Clients'}"
+
+        <div class="menu-btn" :class="{active: $route.name=== 'Clients'}"
              @click="$router.push('/clients');">
           <div style="margin-right: auto;" class="elpage">Clients</div>
           <i class="far fa-file-alt" style="font-size: 20px"></i>
           &nbsp;&nbsp;
           <span class="span-active" :class="{span_visibility: $route.name=== 'Clients'}"></span>
         </div>
-        <div  class="menu-btn" :class="{active: $route.name=== 'Produits'}"
+
+        <div class="menu-btn" :class="{active: $route.name=== 'Produits'}"
              @click="$router.push('/produits');">
           <div style="margin-right: auto;" class="elpage">Produits</div>
           <i class="far fa-lemon" style="font-size: 20px"></i>
           &nbsp;&nbsp;
           <span class="span-active" :class="{span_visibility: $route.name=== 'Produits'}"></span>
         </div>
+
         <div class="btn-login" :class="{btn_login_inactive: $route.name=== 'Produits'}">
           <i class="fas fa-power-off" :class="{login_connected: login_status===true}"
              style="font-size: 20px;"></i>
           &nbsp;&nbsp;
           &nbsp;
-          <div >{{ login_status }}</div>
+          <div>{{ login_status }}</div>
 
         </div>
 
@@ -219,14 +222,15 @@ export default {
 }
 
 .user_poste {
-display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   color: #adadad;
   font-size: 12px;
   font-weight: 600;
 }
-.span-user{
+
+.span-user {
   margin-top: 0.5rem;
   height: 0.15rem;
   width: 3rem;
