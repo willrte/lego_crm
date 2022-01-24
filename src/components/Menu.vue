@@ -216,7 +216,7 @@ export default {
 
 .user_infos {
   display: flex;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   height: 1.8rem;
 }

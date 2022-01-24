@@ -13,11 +13,9 @@
     <div style="display: flex; flex-direction: column">
       <input v-model="usernumber">
       <button @click="suppelement">suppelement</button>
-
     </div>
 
     <div class="pageActive">
-
       <router-view v-slot="{ Component }"></router-view>
     </div>
 
@@ -35,8 +33,8 @@ export default {
   data() {
     return {
       login_status_test: 'Connexion',
-      nom: 'Caron',
-      prenom: 'Théo',
+      prenom: 'William',
+      nom: 'Ratelade',
       poste: 'UX/UI Designer',
       database: null,
       usernumber: 0
