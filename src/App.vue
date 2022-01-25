@@ -5,18 +5,18 @@
       <Menu :login_status="login_status_test" :nom="nom" :prenom="prenom" :poste="poste"/>
     </div>
 
-    <div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: column; width: 5rem">
       <input v-model="usernumber">
       <button @click="addelement">addelement</button>
       <div>{{database.client.find((client)=>client.id===usernumber)}}</div>
     </div>
-    <div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: column; width: 5rem">
       <input v-model="usernumber">
       <button @click="suppelement">suppelement</button>
     </div>
 
     <div class="pageActive">
-      <router-view v-slot="{ Component }"></router-view>
+      <router-view v-slot="{ Component }" :database="database"></router-view>
     </div>
 
   </div>
@@ -37,7 +37,7 @@ export default {
       nom: 'Ratelade',
       poste: 'UX/UI Designer',
       database: null,
-      usernumber: 0
+      usernumber: 0,
     }
   },
   components: {
