@@ -5,15 +5,15 @@
       <Menu :login_status="login_status_test" :nom="nom" :prenom="prenom" :poste="poste"/>
     </div>
 
-    <div style="display: flex; flex-direction: column; width: 5rem">
-      <input v-model="usernumber">
-      <button @click="addelement">addelement</button>
-      <div>{{database.client.find((client)=>client.id===usernumber)}}</div>
-    </div>
-    <div style="display: flex; flex-direction: column; width: 5rem">
-      <input v-model="usernumber">
-      <button @click="suppelement">suppelement</button>
-    </div>
+<!--    <div style="display: flex; flex-direction: column; width: 5rem">-->
+<!--      <input v-model="usernumber">-->
+<!--      <button @click="addelement">addelement</button>-->
+<!--      <div>{{database.client.find((client)=>client.id===usernumber)}}</div>-->
+<!--    </div>-->
+<!--    <div style="display: flex; flex-direction: column; width: 5rem">-->
+<!--      <input v-model="usernumber">-->
+<!--      <button @click="suppelement">suppelement</button>-->
+<!--    </div>-->
 
     <div class="pageActive">
       <router-view v-slot="{ Component }" :database="database"></router-view>
@@ -94,11 +94,11 @@ html, body {
 .app{
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   color: #ffffff;
   background: #29292a;
-
 }
 .pageActive {
   width: 100%;
@@ -106,8 +106,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 1rem;
-
+  /*padding: 0 1rem;*/
 }
 
 
