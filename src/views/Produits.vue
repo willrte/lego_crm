@@ -2,7 +2,7 @@
   <div v-if="database" class="page">
     <div class="titre">
       <p style="font-size: 30px; font-weight: bold">Produits</p>
-      <button @click="addelement()">addelement</button>
+      <button @click="addelement">addelement</button>
     </div>
     <div class="content">
 
@@ -20,10 +20,10 @@
           </div>
           <div class="actions_item">
 
-
             <button v-if="!item.showOptions" @click="openEditor(item)" class="infos_btn">
               Infos
             </button>
+            <button @click="deleteElement(item.id)" class="infobox_btn_close" style="margin-left: auto">supp</button>
             <div v-if="item.showOptions">
               <div class="infobox">
                 <button @click="closeEditor(item)" class="infobox_btn_close" style="margin-left: auto">Fermer</button>
@@ -51,7 +51,6 @@ export default {
 
   data() {
     return {
-      databaseCopy: this.database,
     }
   },
   props: {
@@ -69,22 +68,20 @@ export default {
       this.$emit('UpdateDB');
     },
     addelement() {
-      this.database.client.push({
+      this.database.produits.push({
         id: "100",
         showOptions: false,
         nom: 'nom item',
         collection_id: 'Test collection',
         prix: '250',
       });
-      this.sendToDb();
+      this.$emit('UpdateDB');
     },
-    suppelement() {
-      this.database.client.splice(this.database.client.findIndex((client)=>client.id===this.usernumber),1)
-      this.sendToDb()
+    deleteElement(idItem) {
+      // this.database.produits.splice(this.database.produits.findIndex((item)=>item.id===item),1)
+      this.database.produits = this.database.produits.filter(item => item.id != idItem);
+      this.$emit('UpdateDB');
     },
-    refreshDatabase() {
-      this.database = this.databaseCopy;
-    }
 
   }
 }
