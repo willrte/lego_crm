@@ -1,7 +1,7 @@
 <template>
   <div v-if="database" class="page">
     <div class="titre">
-      <p style="font-size: 30px; font-weight: bold">Clients</p>
+      <p style="font-size: 30px; font-weight: bold">{{$route.name}}</p>
     </div>
     <div class="content">
       <div class="liste_clients">
