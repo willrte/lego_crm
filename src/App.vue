@@ -94,7 +94,7 @@ html, body {
 .app{
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+  overflow-x: hidden;
   display: flex;
   flex-direction: row;
   color: #ffffff;

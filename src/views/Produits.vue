@@ -125,7 +125,7 @@ export default {
   min-width: 100%;
   max-height: 90vh;
   margin: 0 2rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
