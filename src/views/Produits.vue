@@ -2,6 +2,7 @@
   <div v-if="database" class="page">
     <div class="titre">
       <p style="font-size: 30px; font-weight: bold">Produits</p>
+      <button @click="addelement()">addelement</button>
     </div>
     <div class="content">
 
@@ -25,10 +26,11 @@
             </button>
             <div v-if="item.showOptions">
               <div class="infobox">
-                <button @click="closeEditor(item)" class="infos_btn">Fermer</button>
-                Edit options
-                <input type="text" v-model="item.nom" placeholder="Nom du produit">
-                <button @click="closeAndSave(item)" class="infos_btn" style="margin-top: 1rem">Sauvegarder</button>
+                <button @click="closeEditor(item)" class="infobox_btn_close" style="margin-left: auto">Fermer</button>
+                <p>Edit options</p>
+                <input type="text" style="width: 50%" v-model="item.nom" placeholder="Nom du produit">
+                <button @click="closeAndSave(item)" class="infobox_btn_save">
+                  Sauvegarder</button>
               </div>
               <div class="allPageClick" @click="closeEditor(item)"></div>
             </div>
@@ -46,8 +48,11 @@
 <script>
 export default {
   name: 'Produits',
+
   data() {
-    return {}
+    return {
+      databaseCopy: this.database,
+    }
   },
   props: {
     database: "",
@@ -61,34 +66,24 @@ export default {
     },
     closeAndSave(item) {
       item.showOptions = false;
-      this.sendToDb();
-    },
-    sendToDb () {
-      fetch('http://localhost:8082/api/update-db',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin':'*'
-        },
-        mode: 'cors',
-        body: JSON.stringify(this.database)
-
-      })
+      this.$emit('UpdateDB');
     },
     addelement() {
       this.database.client.push({
-        id: this.usernumber,
-        nom: 'Caron',
-        prenom: 'Théo',
-        poste: 'UX/UI Designer',
-        email: ''
+        id: "100",
+        showOptions: false,
+        nom: 'nom item',
+        collection_id: 'Test collection',
+        prix: '250',
       });
       this.sendToDb();
-
     },
     suppelement() {
       this.database.client.splice(this.database.client.findIndex((client)=>client.id===this.usernumber),1)
       this.sendToDb()
+    },
+    refreshDatabase() {
+      this.database = this.databaseCopy;
     }
 
   }
@@ -164,7 +159,52 @@ export default {
   cursor: pointer;
   margin-left: auto;
 }
-
+.infobox_btn {
+  background-color: #232222;
+  color: #fff;
+  border: none;
+  height: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.infobox_btn_save {
+  background-color: #232222;
+  color: #fff;
+  border: none;
+  height: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+  border: 2px solid #00a900;
+  color: white;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0px 0px rgba(0, 169, 0, 0.25);
+}
+.infobox_btn_save:hover, info_btn_save:focus, info_btn_save:active {
+  /*background-color: #4c8f4a;*/
+  /*border-color: transparent;*/
+  margin-top: 0.8rem;
+  transition: ease-in-out 0.2s;
+  box-shadow: 0 10px 20px rgba(0, 169, 0, 0.70);
+}
+.infobox_btn_close {
+  background-color: #232222;
+  height: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid #7a7a7a;
+  color: white;
+  /*padding: 1.2rem 2rem;*/
+  display: flex;
+  align-items: center;
+}
+.infobox_btn_close:hover {
+  background-color: #7a7a7a;
+  border-color: transparent;
+  transition: ease-in-out 0.2s;
+}
 .infos_btn:active, .infos_btn:focus, .infos_btn:hover {
   background-color: #562f2f;
   transition-duration: 0.3s;
@@ -179,12 +219,13 @@ export default {
 .infobox {
   display: flex;
   position: absolute;
+  align-items: center;
   z-index: 10;
   left: 30rem;
   top: 15rem;
   flex-direction: column;
-  width: 30rem;
-  height: 8rem;
+  width: 25rem;
+  height: 13rem;
   background: #232222;
   /*box-shadow: 0 10px 10px #232222;*/
   border-radius: 0.5rem;

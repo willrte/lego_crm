@@ -16,9 +16,8 @@
 <!--    </div>-->
 
     <div class="pageActive">
-      <router-view v-slot="{ Component }" :database="database"></router-view>
+      <router-view v-slot="{ Component }" @UpdateDB="sendToDb" :database="database"></router-view>
     </div>
-
   </div>
 
 </template>
@@ -83,6 +82,14 @@ export default {
 }
 </script>
 <style>
+input[type=text] {
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  background-color: #505050;
+  border: 2px solid #505050;
+  border-radius: 5px;
+  color: white;
+}
 html, body {
   padding: 0;
   margin: 0;
