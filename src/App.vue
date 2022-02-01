@@ -63,17 +63,6 @@ export default {
 
       })
     },
-    addelement() {
-      this.database.client.push({
-        id: this.usernumber,
-        nom: 'Caron',
-        prenom: 'Théo',
-        poste: 'UX/UI Designer',
-        email: ''
-      });
-      this.sendToDb();
-
-    },
     suppelement() {
       this.database.client.splice(this.database.client.findIndex((client)=>client.id===this.usernumber),1)
       this.sendToDb()
@@ -82,7 +71,7 @@ export default {
 }
 </script>
 <style>
-input[type=text] {
+input[type=text], input[type=password], input[type=number], [list] {
   padding: 0.5rem 1rem;
   box-sizing: border-box;
   background-color: #505050;
