@@ -53,6 +53,7 @@
             <button v-if="!item.showOptions" @click="openEditor(item)" class="infos_btn">Infos</button>
             <button @click="deleteElement(item.id)" class="infobox_btn_supp" style="margin-left: auto">&nbsp;X&nbsp;</button>
             <div v-if="item.showOptions">
+
               <div class="infobox">
                 <div style="display: flex; align-items: center; margin-bottom: 1rem">
                   <div>Modifier les infos</div>
@@ -77,6 +78,7 @@
                   Sauvegarder
                 </button>
               </div>
+
               <div class="allPageClick" @click="closeEditor(item)"></div>
             </div>
           </div>

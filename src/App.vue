@@ -25,7 +25,6 @@
 <script>
 import Menu from './components/Menu.vue';
 import Version from './components/Version.vue';
-
 const fs = require("fs");
 export default {
   name: 'App',
@@ -42,6 +41,7 @@ export default {
   components: {
     Menu,
     Version,
+
   },
   async mounted() {
     await fetch('http://localhost:8082/api/get-db')
