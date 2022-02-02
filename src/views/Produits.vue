@@ -50,7 +50,7 @@
           </div>
           <div class="actions_item">
 
-            <button v-if="!item.showOptions" @click="openEditor(item)" class="infos_btn">Infos</button>
+            <button v-if="!item.showOptions" @click="openEditor(item)" class="infos_btn">Modifier</button>
             <button @click="deleteElement(item.id)" class="infobox_btn_supp" style="margin-left: auto">&nbsp;X&nbsp;</button>
             <div v-if="item.showOptions">
 
@@ -72,7 +72,7 @@
                 </div>
                 <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
                   <div style="margin: 0.2rem auto 0 1rem ">Prix (€)</div>
-                  <input type="text" style="width: 50%" v-model="item.prix" placeholder="Prix">
+                  <input type="number" style="width: 50%;" v-model="item.prix" placeholder="Prix">
                 </div>
                 <button @click="closeAndSave(item)" class="infobox_btn_save">
                   Sauvegarder
@@ -137,7 +137,7 @@ export default {
     addProduit() {
       this.database.produits.push({
         id: this.generateId().toString(),
-        showOptions: false,
+        // showOptions: false,
         nom: this.nom,
         collection_id: this.collection_id.toString(),
         prix: this.prix.toString(),

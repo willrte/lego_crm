@@ -71,7 +71,7 @@ export default {
 }
 </script>
 <style>
-input[type=text], input[type=password], input[type=number], [list] {
+input, [list] {
   padding: 0.5rem 1rem;
   box-sizing: border-box;
   background-color: #505050;
