@@ -11,6 +11,7 @@
         <div class="user_poste">
           {{ poste }}
         </div>
+        <div style="font-size: 15px" class="btn_user_profile" :class="{user_active: $route.name=== 'Profil'}" @click="$router.push('/profil')"><i class="far fa-user" ></i></div>
       </div>
       <span class="span-user"></span>
 
@@ -32,7 +33,7 @@
         <div class="menu-btn" :class="{active: $route.name=== 'Clients'}"
              @click="$router.push('/clients');">
           <div style="margin-right: auto;" class="elpage">Clients</div>
-          <i class="far fa-user" style="font-size: 20px"></i>
+          <i class="far fa-address-book" style="font-size: 20px"></i>
           &nbsp;&nbsp;
           <span class="span-active" :class="{span_visibility: $route.name=== 'Clients'}"></span>
         </div>
@@ -236,5 +237,27 @@ export default {
   width: 3rem;
   background-color: #c9c9c9;
   border-radius: 99px;
+}
+.btn_user_profile{
+  display: flex;
+  justify-content: center;
+  background-color: #232222;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  color: #a4a4a4;
+  align-items: center;
+  border-radius: 3rem;
+  border: 2px solid #232222;
+}
+.btn_user_profile:hover, btn_user_profile:focus, btn_user_profile:active{
+  background-color: #29292a;
+  border-color: white;
+  color: white;
+  transition-duration: 0.3s;
+}
+.user_active{
+  border-color: red !important;
+  color: white;
 }
 </style>

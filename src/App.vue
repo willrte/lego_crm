@@ -4,17 +4,6 @@
     <div class="menu">
       <Menu :login_status="login_status_test" :nom="nom" :prenom="prenom" :poste="poste"/>
     </div>
-
-<!--    <div style="display: flex; flex-direction: column; width: 5rem">-->
-<!--      <input v-model="usernumber">-->
-<!--      <button @click="addelement">addelement</button>-->
-<!--      <div>{{database.client.find((client)=>client.id===usernumber)}}</div>-->
-<!--    </div>-->
-<!--    <div style="display: flex; flex-direction: column; width: 5rem">-->
-<!--      <input v-model="usernumber">-->
-<!--      <button @click="suppelement">suppelement</button>-->
-<!--    </div>-->
-
     <div class="pageActive">
       <router-view v-slot="{ Component }" @UpdateDB="sendToDb" :database="database"></router-view>
     </div>
@@ -299,5 +288,16 @@ html, body {
   color: white;
   font-size: 18px;
   font-weight: 500
+}
+@media screen and (max-width: 1100px) {
+  .item_container {
+    flex-direction: column;
+    /*align-items: center;*/
+    justify-content: center;
+  }
+  .actions_item {
+    margin-left: 0;
+    margin-top: ;
+  }
 }
 </style>
