@@ -30,6 +30,7 @@ export default {
   name: 'App',
   data() {
     return {
+      page_title: 'Lego CRM -',
       login_status_test: 'Connexion',
       prenom: 'William',
       nom: 'Ratelade',
@@ -105,5 +106,198 @@ html, body {
   /*padding: 0 1rem;*/
 }
 
+.infobox {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  z-index: 10;
+  left: 30rem;
+  top: 15rem;
+  flex-direction: column;
+  width: 30rem;
+  min-height: max-content;
+  background: #232222;
+  /*box-shadow: 0 10px 10px #232222;*/
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  overflow: hidden;
+}
 
+.allPageClick {
+  display: flex;
+  position: absolute;
+  background: transparent;
+  z-index: 2;
+  left: 1px;
+  top: 1px;
+  height: 99vh;
+  width: 98vw;
+  overflow: hidden;
+}
+
+.add_btn {
+  background-color: #232222;
+  color: #fff;
+  border: 2px solid #bda63f;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0.5rem;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.add_btn:active, .add_btn:focus, .add_btn:hover {
+  background-color: #bda63f;
+  transition-duration: 0.3s;
+}
+.infos_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #232222;
+  color: #fff;
+  border: 2px solid #40819d;
+  height: 2rem;
+  width: 2rem;
+  padding: 1rem;
+  font-size: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.item_container {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  height: max-content;
+  margin-bottom: 1rem;
+  padding: 0.3rem 1rem;
+  border-radius: 0.5rem;
+  background: #505050;
+  box-shadow: 0 10px 10px #232222;
+}
+.item {
+  display: flex;
+  max-height: max-content;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+.item_description {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  width: 55vw;
+}
+.actions_item {
+  display: flex;
+  flex-flow: wrap row;
+  align-items: center;
+  margin-left: 2rem;
+  width:max-content;
+}
+.infos_btn:active, .infos_btn:focus, .infos_btn:hover {
+  background-color: #40819d;
+  transition-duration: 0.3s;
+}
+
+.infobox_btn_save {
+  background-color: #232222;
+  color: #fff;
+  border: none;
+  height: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+  border: 2px solid #00a900;
+  color: white;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0px 0px rgba(0, 169, 0, 0.25);
+}
+
+.infobox_btn_save:hover, info_btn_save:focus, info_btn_save:active {
+  /*background-color: #4c8f4a;*/
+  /*border-color: transparent;*/
+  transition: ease-in-out 0.2s;
+  background-color: #00a900;
+  box-shadow: 0 0px 20px rgba(0, 169, 0, 0.70);
+}
+
+.infobox_btn_close {
+  display: flex;
+  justify-content: center;
+  background-color: #232222;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid #7a7a7a;
+  color: white;
+  /*padding: 1.2rem 2rem;*/
+  align-items: center;
+}
+
+.infobox_btn_close:hover {
+  background-color: #7a7a7a;
+  border-color: transparent;
+  transition: ease-in-out 0.2s;
+}
+
+.infobox_btn_supp {
+  background-color: #232222;
+  height: 2rem;
+  width: 2rem;
+  font-size: 15px;
+  padding: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  border: 2px solid #9d5555;
+  /*color: white;*/
+  /*padding: 1.2rem 2rem;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*margin-right: 1rem;*/
+}
+
+.infobox_btn_supp:hover {
+  background-color: #9d5555;
+  border-color: transparent;
+  transition: ease-in-out 0.2s;
+}
+.date_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: max-content;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.5rem;
+  background: #29292a;
+  color: white;
+  font-size: 15px; font-weight: 400
+}
+.contrat_id_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /*width: 8.5rem;*/
+  width: max-content;
+  height: max-content;
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.5rem;
+  background: #9d5555;
+  color: white;
+  font-size: 18px;
+  font-weight: 500
+}
 </style>

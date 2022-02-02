@@ -24,7 +24,7 @@
 
         <div class="menu-btn" :class="{active: $route.name=== 'Contrats'}" @click="$router.push('/contrats');">
           <div style="margin-right: auto;" class="elpage">Contrats</div>
-          <i class="far fa-user" style="font-size: 20px"></i>
+          <i class="far fa-file-alt" style="font-size: 20px"></i>
           &nbsp;&nbsp;
           <span class="span-active" :class="{span_visibility: $route.name=== 'Contrats'}"></span>
         </div>
@@ -32,7 +32,7 @@
         <div class="menu-btn" :class="{active: $route.name=== 'Clients'}"
              @click="$router.push('/clients');">
           <div style="margin-right: auto;" class="elpage">Clients</div>
-          <i class="far fa-file-alt" style="font-size: 20px"></i>
+          <i class="far fa-user" style="font-size: 20px"></i>
           &nbsp;&nbsp;
           <span class="span-active" :class="{span_visibility: $route.name=== 'Clients'}"></span>
         </div>
