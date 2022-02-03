@@ -4,6 +4,14 @@
       <p style="font-size: 30px; font-weight: bold">{{$route.name}}</p>
     </div>
     <div class="content">
+      produits : {{allProduitsPrix}}
+      nombre de clients : {{nbClients}}
+      nombre de commandes : {{nbCommandes}}
+      nombre de produits : {{nbProduits}}
+      add all prix : {{allProduitsaddPrix}}
+    </div>
+    <div>
+
     </div>
   </div>
 
@@ -14,7 +22,13 @@
 export default {
   name: 'Home',
   data() {
-    return {}
+    return {
+      nbClients: this.database.clients.length,
+      nbCommandes: this.database.contrats.length,
+      nbProduits: this.database.produits.length,
+      allProduitsaddPrix: 0,
+      allProduitsPrix: this.database.produits.map(produit => produit.prix),
+    }
   },
   props: {
     database: "",

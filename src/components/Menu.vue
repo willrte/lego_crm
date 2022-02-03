@@ -248,7 +248,7 @@ export default {
   color: #a4a4a4;
   align-items: center;
   border-radius: 3rem;
-  border: 2px solid #232222;
+  border: 2px solid #a4a4a4;
 }
 .btn_user_profile:hover, btn_user_profile:focus, btn_user_profile:active{
   background-color: #29292a;

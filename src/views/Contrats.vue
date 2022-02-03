@@ -13,24 +13,38 @@
                   class="fa-solid fa-xmark"></i></button>
             </div>
             <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
-              <div style="margin: 0.2rem auto 0 1rem ;">Nom</div>
-              <input type="text" style="width: 50%" v-model="id_client" placeholder="Id client">
-            </div>
-            <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
               <div style="margin: 0.2rem auto 0 1rem ">Client</div>
               <!--              <input type="text" style="width: 50%" v-model="collection_id" placeholder="Numéro de collection">-->
-              <select id="clients" class="inputsecours" style="width: 50%" v-model="client_id"
-                      placeholder="Sélection du client">
-                <option v-for="client in database.clients" v-bind:value="client.id">{{ client.nom }}</option>
+              <select class="inputsecours" style="width: 50%" v-model="id_client">
+                <option v-for="client in database.clients" v-bind:value="client.id">{{ client.prenom }} {{
+                    client.nom
+                  }}
+                </option>
               </select>
             </div>
             <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
-              <div style="margin: 0.2rem auto 0 1rem ">Prix (€)</div>
-              <input type="number" style="width: 50%;" v-model="prix" placeholder="Prix">
+              <div style="margin: 0.2rem auto 0 1rem ;">
+                <div style="height: 1.2rem">Date de la commande</div>
+                <div style="color: #7a7a7a; font-size: 12px;">Laisser vide pour la date du jour</div>
+              </div>
+              <input type="date" style="width: 50%" v-model="date_commande"
+                     placeholder="Laisser vide pour la date du jour">
             </div>
-            <button @click="closeAndSaveAjout()" class="infobox_btn_save">
-              Sauvegarder
-            </button>
+            <button @click="openShowProduitsContrat()" class="add_produit">Ajouter un produit</button>
+            <div v-if="openShowProduitsContrat" class="infobox"
+                 style="z-index: 15 !important; height: max-content; width: max-content">
+              <button @click="closeShowProduitsContrat()" class="infobox_btn_close" style="margin-left: 1rem"><i
+                  class="fa-solid fa-xmark"></i></button>
+              <div
+                  style="display: flex; align-items: center;justify-content: center; width: 100%; flex-wrap: wrap ;margin-bottom: 0.5rem">
+                <select class="inputsecours" style="width: 50%" v-model="produits_contrat">
+                  <option v-for="produit in database.produits" v-bind:value="produit.id">{{ produit.nom }}</option>
+                </select>
+                <div class="product_contrat"></div>
+              </div>
+            </div>
+            <button @click="closeAndSaveAjout()" class="infobox_btn_save">Sauvegarder</button>
+
           </div>
           <div class="allPageClick" @click="closeAjout()"></div>
         </div>
@@ -71,7 +85,8 @@
               <div class="infobox">
                 <div style="display: flex; align-items: center; margin-bottom: 1rem">
                   <div>Détails du contrat N°&nbsp;</div>
-                  <div class="date_container" style="border: 2px solid #af3232; padding: 0.2rem 0.5rem">{{ item.id }}</div>
+                  <div class="date_container" style="border: 2px solid #af3232; padding: 0.2rem 0.5rem">{{ item.id }}
+                  </div>
                   <button @click="closeEditor(item)" class="infobox_btn_close" style="margin-left: 1rem"><i
                       class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -91,7 +106,9 @@
                 </div>
                 <div
                     style="display: flex; flex-direction: column;align-items: center;justify-content: center; width: 100%; margin-bottom: 0.5rem">
-                  <div style="display:flex; justify-content: center; width:100%;font-weight: 700; color: #b2b2b2">Produits</div>
+                  <div style="display:flex; justify-content: center; width:100%;font-weight: 700; color: #b2b2b2">
+                    Produits
+                  </div>
                   <span class="span_produits_contrat"></span>
 
                   <div style="display: flex; align-items: center;justify-content: center; width: 100%; flex-wrap: wrap">
@@ -103,21 +120,17 @@
                       </div>
                     </div>
                   </div>
-                  <div>Total de la commande : {{calculTotal(item.id)}}€</div>
+                  <div>Total de la commande : {{ calculTotal(item.id) }}€</div>
 
                 </div>
-<!--                <button @click="closeAndSave(item)" class="infobox_btn_save">-->
-<!--                  Sauvegarder-->
-<!--                </button>-->
+                <button @click="closeAndSave(item)" class="infobox_btn_save">
+                  Sauvegarder
+                </button>
               </div>
-
               <div class="allPageClick" @click="closeEditor(item)"></div>
             </div>
           </div>
-
         </div>
-
-        <!--        {{database.produits}}-->
       </div>
     </div>
   </div>
@@ -130,7 +143,7 @@ export default {
   data() {
     return {
       id_client: '',
-      produits_contrat: "",
+      produits_contrat: [],
       date_commande: '',
       date_paiement: '',
       is_payed: false,
@@ -141,9 +154,10 @@ export default {
   props: {
     database: "",
   },
+
   methods: {
     openEditor(item) {
-      item.showProduitsContrat = true
+      item.showProduitsContrat = true;
     },
     closeEditor(item) {
       item.showProduitsContrat = false;
@@ -168,6 +182,12 @@ export default {
       } else {
         alert('Veuillez remplir tous les champs')
       }
+    },
+    openShowProduitsContrat() {
+      this.showProduitsContrat = true;
+    },
+    closeShowProduitsContrat() {
+      this.showProduitsContrat = false;
     },
     addProduit() {
       this.database.produits.push({

@@ -141,6 +141,22 @@ html, body {
   background-color: #bda63f;
   transition-duration: 0.3s;
 }
+.add_produit {
+  background-color: #232222;
+  color: #fff;
+  border: 2px solid #bda63f;
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0.5rem;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.add_produit:active, .add_produit:focus, .add_produit:hover {
+  background-color: #bda63f;
+  transition-duration: 0.3s;
+}
 .infos_btn {
   display: flex;
   justify-content: center;
