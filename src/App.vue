@@ -106,7 +106,7 @@ html, body {
   width: 30rem;
   min-height: max-content;
   background: #232222;
-  /*box-shadow: 0 10px 10px #232222;*/
+  box-shadow: 0 10px 50px rgba(35, 34, 34, 0.85);
   border-radius: 0.5rem;
   padding: 1rem;
   margin-top: 1rem;
@@ -196,12 +196,10 @@ html, body {
 
 .infobox_btn_save {
   background-color: #232222;
-  color: #fff;
-  border: none;
   height: 2rem;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 1rem;
+  /*margin-top: 0.5rem;*/
   border: 2px solid #00a900;
   color: white;
   padding: 1.2rem 2rem;
@@ -256,8 +254,29 @@ html, body {
   /*margin-right: 1rem;*/
 }
 
-.infobox_btn_supp:hover {
+.infobox_btn_supp:hover, info_btn_supp:focus, info_btn_supp:active {
   background-color: #9d5555;
+  border-color: transparent;
+  transition: ease-in-out 0.2s;
+}
+.infobox_btn_view {
+  background-color: #232222;
+  height: 2rem;
+  width: 2rem;
+  font-size: 15px;
+  padding: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  border: 2px solid #75559d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.infobox_btn_view:hover, infobox_btn_view:focus, infobox_btn_view:active {
+  background-color: #75559d;
   border-color: transparent;
   transition: ease-in-out 0.2s;
 }
@@ -284,7 +303,8 @@ html, body {
   height: max-content;
   padding: 0.1rem 0.5rem;
   border-radius: 0.5rem;
-  background: #9d5555;
+  /*background: #9d5555;*/
+  background: #af3232;
   color: white;
   font-size: 18px;
   font-weight: 500
@@ -299,5 +319,16 @@ html, body {
     margin-left: 0;
     margin-top: ;
   }
+}
+.right_data_infos{
+  display:flex;
+  justify-content: left;
+  width:50%;
+}
+.left_data_infos{
+  display:flex;
+  width:50%;
+  margin-right:1rem;
+  justify-content: right;
 }
 </style>
