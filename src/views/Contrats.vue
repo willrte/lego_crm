@@ -30,6 +30,14 @@
               <input type="date" style="width: 50%" v-model="date_commande"
                      placeholder="Laisser vide pour la date du jour">
             </div>
+            <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
+              <div style="margin: 0.2rem auto 0 1rem ;">
+                <div style="height: 1.2rem">Date du paiement</div>
+                <div style="color: #7a7a7a; font-size: 12px;">Laisser vide pour la date du jour</div>
+              </div>
+              <input type="date" style="width: 50%" v-model="date_paiement"
+                     placeholder="Laisser vide pour la date du jour">
+            </div>
             <button @click="openShowProduitsContrat()" class="add_produit">Ajouter un produit</button>
             <div v-if="openShowProduitsContrat" class="infobox"
                  style="z-index: 15 !important; height: max-content; width: max-content">
@@ -98,11 +106,11 @@
                 </div>
                 <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
                   <div class="left_data_infos" style="color: #7a7a7a">Date de la commande</div>
-                  <div class="right_data_infos">{{ item.date_commande }}</div>
+                  <input type="date" style="width: 50%" v-model="item.date_commande"/>
                 </div>
                 <div v-if="item.date_paiement" style="display: flex; width: 100%; margin-bottom: 0.5rem">
-                  <div class="left_data_infos" style="color: #7a7a7a">Date de la commande</div>
-                  <div class="right_data_infos">{{ item.date_paiement }}</div>
+                  <div class="left_data_infos" style="color: #7a7a7a">Date du paiement</div>
+                  <input type="date" style="width: 50%" v-model="item.date_paiement"/>
                 </div>
                 <div
                     style="display: flex; flex-direction: column;align-items: center;justify-content: center; width: 100%; margin-bottom: 0.5rem">
@@ -127,7 +135,7 @@
                   Sauvegarder
                 </button>
               </div>
-              <div class="allPageClick" @click="closeEditor(item)"></div>
+              <div class="allPageClick" @click="closeAndSaveAjout(item)"></div>
             </div>
           </div>
         </div>
@@ -144,8 +152,8 @@ export default {
     return {
       id_client: '',
       produits_contrat: [],
-      date_commande: '',
-      date_paiement: '',
+      date_commande: this.currentDate(),
+      date_paiement: this.currentDate(),
       is_payed: false,
       showAjout: false,
       showProduitsContrat: false,
@@ -173,12 +181,11 @@ export default {
       this.showAjout = false;
     },
     closeAndSaveAjout() {
-      if (this.nom !== '' && this.prix !== '' && this.collection_id !== '') {
+      if (this.date_commande !== '' ) {
         this.showAjout = false;
         this.addProduit()
-        this.nom = '';
-        this.prix = '';
-        this.collection_id = '';
+        this.date_commande = '';
+        this.date_paiement = '';
       } else {
         alert('Veuillez remplir tous les champs')
       }
@@ -190,7 +197,7 @@ export default {
       this.showProduitsContrat = false;
     },
     addProduit() {
-      this.database.produits.push({
+      this.database.contrats.push({
         id: this.generateIdContrat().toString(),
         // showOptions: false,
         id_client: this.id_client,
@@ -240,6 +247,12 @@ export default {
       }
       return total;
     },
+    currentDate() {
+      // const current = new Date();
+      // const ajdDate = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+      const ajdDate = new Date().toJSON().slice(0,10);
+      return ajdDate.toString();
+    }
 
   }
 }

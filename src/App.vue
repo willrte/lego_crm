@@ -301,7 +301,7 @@ html, body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 5rem;
+  width: 6rem;
   height: max-content;
   padding: 0.3rem 0.5rem;
   border-radius: 0.5rem;
