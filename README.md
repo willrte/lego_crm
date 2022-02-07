@@ -2,7 +2,7 @@
 
 ## Project setup
 
-The lego_crm project is necessary for the proper functioning of this project
+:warning: **The lego_crm project is necessary for the proper functioning of this project**
 
 ```
 npm install
