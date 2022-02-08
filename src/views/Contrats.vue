@@ -90,6 +90,7 @@
             <button @click="deleteElement(item.id)" class="infobox_btn_supp" style="margin-left: auto"><i
                 class="fa-solid fa-xmark"></i></button>
             <div v-if="item.showProduitsContrat">
+
               <div class="infobox">
                 <div style="display: flex; align-items: center; margin-bottom: 1rem">
                   <div>Détails du contrat N°&nbsp;</div>
@@ -108,7 +109,8 @@
                   <div class="left_data_infos" style="color: #7a7a7a">Date de la commande</div>
                   <input type="date" style="width: 50%" v-model="item.date_commande"/>
                 </div>
-                <div v-if="item.date_paiement" style="display: flex; width: 100%; margin-bottom: 0.5rem">
+<div v-if="item.date_paiement" style="display: flex; width: 100%; margin-bottom: 0.5rem">
+                <!--                <div style="display: flex; width: 100%; margin-bottom: 0.5rem">-->
                   <div class="left_data_infos" style="color: #7a7a7a">Date du paiement</div>
                   <input type="date" style="width: 50%" v-model="item.date_paiement"/>
                 </div>
@@ -135,7 +137,7 @@
                   Sauvegarder
                 </button>
               </div>
-              <div class="allPageClick" @click="closeAndSaveAjout(item)"></div>
+              <div class="allPageClick" @click="closeEditor(item)"></div>
             </div>
           </div>
         </div>
@@ -178,6 +180,9 @@ export default {
       this.showAjout = true
     },
     closeAjout() {
+      this.date_paiement= this.currentDate();
+      this.date_commande = this.currentDate();
+      this.id_client = "";
       this.showAjout = false;
     },
     closeAndSaveAjout() {
@@ -215,7 +220,7 @@ export default {
     },
     generateIdContrat(longeurID = 8) {
       let result = '';
-      let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
       let charactersLength = characters.length;
       let i;
       for (i = 0; i < longeurID; i++) {

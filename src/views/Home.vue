@@ -9,6 +9,7 @@
       nombre de commandes : {{nbCommandes}}
       nombre de produits : {{nbProduits}}
       add all prix : {{allProduitsaddPrix}}
+      USER INFOS : {{user_infos}}
     </div>
     <div>
 
@@ -23,6 +24,7 @@ export default {
   name: 'Home',
   data() {
     return {
+      user_infos:this.user_infos,
       nbClients: this.database.clients.length,
       nbCommandes: this.database.contrats.length,
       nbProduits: this.database.produits.length,
@@ -32,6 +34,7 @@ export default {
   },
   props: {
     database: "",
+    user_infos: ""
   },
   methods: {}
 }
