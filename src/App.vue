@@ -347,4 +347,7 @@ html, body {
   margin-right:1rem;
   justify-content: right;
 }
+.activated_box{
+  border: 2px solid #ffffff;
+}
 </style>
