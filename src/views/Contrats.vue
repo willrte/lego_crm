@@ -280,7 +280,10 @@ export default {
       return ajdDate.toString();
     }
 
-  }
+  },
+  beforeMount() {
+    this.$emit('CheckConnexion');
+  },
 }
 </script>
 <style scoped>

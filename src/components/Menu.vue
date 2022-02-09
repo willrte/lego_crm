@@ -16,7 +16,7 @@
       <span class="span-user"></span>
 
       <div class="menu">
-        <div class="menu-btn" :class="{active: $route.name=== 'Home'}" @click="$router.push('/');">
+        <div class="menu-btn" :class="{active: $route.name=== 'Home'}" @click="$router.push('/home');">
           <div style="margin-right: auto;" class="elpage">Home</div>
           <i class="fas fa-globe-europe" style="font-size: 20px"></i>
           &nbsp;&nbsp;
@@ -46,12 +46,10 @@
           <span class="span-active" :class="{span_visibility: $route.name=== 'Produits'}"></span>
         </div>
 
-        <div class="btn-login" :class="{btn_login_inactive: $route.name=== 'Produits'}">
-          <i class="fas fa-power-off" :class="{login_connected: login_status===true}"
-             style="font-size: 20px;"></i>
-          &nbsp;&nbsp;
-          &nbsp;
-          <div>{{ login_status }}</div>
+        <div class="btn-login" @click="ChangeConnexionStatus" :class="{btn_login_inactive: $route.name=== 'Produits'}">
+<!--          <i class="fas fa-power-off" :class="{login_connected: connected===true}" style="font-size: 20px;"></i>-->
+          <i class="fas fa-power-off" style="font-size: 20px;"></i>
+<!--          {{connected}}-->
 
         </div>
 
@@ -72,12 +70,14 @@ import Version from "@/components/Version";
 export default {
   name: 'Menu',
   data() {
-    return {};
+    return {
+      connected:this.connected,
+    };
 
 
   },
   props: {
-    login_status: "",
+    connected: "",
     nom: "",
     prenom: "",
     poste: "",
@@ -85,7 +85,11 @@ export default {
   components: {
     Version
   },
-  methods: {},
+  methods: {
+    ChangeConnexionStatus(){
+      this.$emit('ConnexionOnOff');
+    },
+  },
 }
 
 </script>
@@ -207,6 +211,10 @@ export default {
 
 .login_connected {
   color: #18ff00 !important;
+}
+.login_connected:hover, .login_connected:focus, .login_connected:active {
+  color: #18ff00 !important;
+  border-color: #18ff00 !important;
 }
 
 .user {

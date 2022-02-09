@@ -1,11 +1,32 @@
 <template>
   <div v-if="database" class="page">
     <div class="titre">
-      <p style="font-size: 30px; font-weight: bold">{{$route.name}}</p>
+      <p style="font-size: 30px; font-weight: bold">{{ $route.name }}</p>
     </div>
-    <div class="content">
+    <div class="content" style="justify-content: center; align-items: center;">
+
+      <div class="infos_resume" style="width: 70%;">
+
+        <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
+          <div style="margin: 0.2rem auto 0 1rem ;">Prénom</div>
+          <input type="text" style="width: 50%" v-model="prenom" placeholder="Prénom">
+        </div>
+        <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
+          <div style="margin: 0.2rem auto 0 1rem ;">Nom</div>
+          <input type="text" style="width: 50%" v-model="nom" placeholder="Nom">
+        </div>
+        <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
+          <div style="margin: 0.2rem auto 0 1rem ">Poste</div>
+          <input type="tel" style="width: 50%" v-model="poste" placeholder="Téléphone">
+        </div>
+<!--        {{user_infos}}-->
+        <div class="infobox_btn_save" style="width: max-content; height: 1rem" @click="this.$emit('UpdateDB');">Sauvegarder</div>
+
+      </div>
     </div>
+    <!--      <ProduitsPrix :database="database"/>-->
   </div>
+
 
 
 </template>
@@ -14,12 +35,22 @@
 export default {
   name: 'Profil',
   data() {
-    return {}
+    return {
+      user_infos: this.database.user,
+      prenom: this.database.user.name,
+      nom: this.database.user.lastname,
+      poste: this.database.user.poste,
+      link_img: this.database.user.profil_pic_link,
+
+    }
   },
   props: {
     database: "",
   },
-  methods: {}
+  methods: {},
+  beforeMount() {
+    this.$emit('CheckConnexion');
+  },
 }
 </script>
 <style scoped>
@@ -96,7 +127,8 @@ export default {
   background-color: #2f3556;
   transition-duration: 0.3s;
 }
-.item_description{
+
+.item_description {
   display: flex;
   flex-direction: column;
   width: 100%;
