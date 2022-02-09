@@ -115,15 +115,4 @@ export default {
 }
 
 
-.user_image {
-  margin-top: 1rem;
-  min-height: 5rem;
-  max-height: 5rem;
-  min-width: 5rem;
-  max-width: 5rem;
-  object-fit: cover;
-  margin-bottom: 0.5rem;
-  border-radius: 100%;
-}
-
 </style>
