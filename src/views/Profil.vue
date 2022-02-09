@@ -6,9 +6,12 @@
     <div class="content" style="justify-content: center; align-items: center;">
 
       <div class="infos_resume" style="width: 70%;">
+        <div style="display: flex; width: 100%;height: 5rem; margin-bottom: 0.5rem">
+          <h2 style="color: #7a7a7a">Informations personelles</h2>
+        </div>
 
         <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
-          <div style="margin: 0.2rem auto 0 1rem ;">Prénom</div>
+          <div style="margin: 0.2rem auto 0 1rem;">Prénom</div>
           <input type="text" style="width: 50%" v-model="prenom" placeholder="Prénom">
         </div>
         <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
@@ -19,8 +22,28 @@
           <div style="margin: 0.2rem auto 0 1rem ">Poste</div>
           <input type="tel" style="width: 50%" v-model="poste" placeholder="Téléphone">
         </div>
+        <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
+          <div style="margin: 0.2rem auto 0 1rem ">Image de profil</div>
+          <input type="tel" style="width: 50%" v-model="link_img" placeholder="Lien de l'image">
+        </div>
+        <div style="display: flex; width: 100%; margin-bottom: 0.5rem; justify-content: center">
+          <img :src="link_img" alt="user_image" class="user_image">
+        </div>
+        <div style="display: flex; width: 100%;height: 5rem; margin-bottom: 0.5rem">
+          <h2 style="color: #7a7a7a">Informations de connexion</h2>
+        </div>
+
+        <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
+          <div style="margin: 0.2rem auto 0 1rem ">Pseudo de connexion</div>
+          <input type="tel" style="width: 50%" v-model="username" placeholder="Téléphone">
+        </div>
+        <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
+          <div style="margin: 0.2rem auto 0 1rem ">Mot de passe</div>
+          <input type="password" style="width: 50%" v-model="psswrd" placeholder="Téléphone">
+        </div>
+        <div style="display: flex; width: 100%;height: 2rem;"></div>
 <!--        {{user_infos}}-->
-        <div class="infobox_btn_save" style="width: max-content; height: 1rem" @click="this.$emit('UpdateDB');">Sauvegarder</div>
+        <div class="infobox_btn_save" style="width: max-content; height: 1rem" @click="saveInfos">Sauvegarder</div>
 
       </div>
     </div>
@@ -40,14 +63,27 @@ export default {
       prenom: this.database.user.name,
       nom: this.database.user.lastname,
       poste: this.database.user.poste,
+      username: this.database.user.username,
       link_img: this.database.user.profil_pic_link,
+      psswrd: this.database.user.password,
 
     }
   },
   props: {
     database: "",
   },
-  methods: {},
+  methods: {
+    saveInfos(){
+      this.database.user.name = this.prenom;
+      this.database.user.lastname = this.nom;
+      this.database.user.poste = this.poste;
+      this.database.user.username = this.username;
+      this.database.user.password = this.psswrd;
+      this.database.user.profil_pic_link = this.link_img;
+      this.$emit('UpdateDB');
+      this.$router.go();
+    }
+  },
   beforeMount() {
     this.$emit('CheckConnexion');
   },
@@ -78,60 +114,16 @@ export default {
   margin-bottom: 1rem;
 }
 
-.liste_items {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-height: 100vh;
-  margin: 0 2rem;
-  /*overflow: scroll;*/
-}
 
-.item {
-  display: flex;
-  max-height: 2rem;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-}
-
-.item_container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-bottom: 1rem;
-  padding: 0.3rem 1rem;
-  border-radius: 0.5rem;
-  background: #505050;
-  box-shadow: 0 10px 10px #232222;
-}
-
-.actions_item {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  width: 15%;
-}
-
-.infos_btn {
-  background-color: #232222;
-  color: #fff;
-  border: none;
-  height: 2rem;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-.infos_btn:active, .infos_btn:focus, .infos_btn:hover {
-  background-color: #2f3556;
-  transition-duration: 0.3s;
-}
-
-.item_description {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+.user_image {
+  margin-top: 1rem;
+  min-height: 5rem;
+  max-height: 5rem;
+  min-width: 5rem;
+  max-width: 5rem;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+  border-radius: 100%;
 }
 
 </style>

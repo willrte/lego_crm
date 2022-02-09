@@ -4,6 +4,7 @@
       <p style="font-size: 30px; font-weight: bold">{{ $route.name }}</p>
     </div>
     <div class="content" style="justify-content: center; align-items: center;">
+
       <div @click="ChangeConnexionStatus" class="infobox_btn_save" style="width: max-content; padding: 0.5rem">Connexion</div>
     </div>
   </div>

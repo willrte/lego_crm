@@ -2,7 +2,7 @@
   <div v-if="database" class="app">
 
     <div v-if="connected"   class="menu">
-      <Menu :nom="nom" :prenom="prenom" :poste="poste" :connected="connected" @ConnexionOnOff="ConnexionOnOff"/>
+      <Menu :database="database" :connected="connected" @ConnexionOnOff="ConnexionOnOff"  @UpdateDB="sendToDb"/>
     </div>
 
     <div class="pageActive">
@@ -23,9 +23,6 @@ export default {
     return {
       page_title: 'Lego CRM -',
       connected: false,
-      prenom: 'William',
-      nom: 'Ratelade',
-      poste: 'UX/UI Designer',
       database: null,
       usernumber: 0,
     }

@@ -1,14 +1,14 @@
 <template>
   <div class="menu-container">
     <div class="inside-container">
-      <img src="https://i.gifer.com/3Iga.gif" alt="user_image" class="user_image">
+      <img :src="link_img" alt="user_image" class="user_image">
       <div class="user">
         <div class="user_infos">
           <div>{{ prenom }}</div>
           &nbsp;
           <div>{{ nom }}</div>
         </div>
-        <div class="user_poste">
+        <div class="user_poste" style="margin-bottom: 0.5rem">
           {{ poste }}
         </div>
         <div style="font-size: 15px" class="btn_user_profile" :class="{user_active: $route.name=== 'Profil'}" @click="$router.push('/profil')"><i class="far fa-user" ></i></div>
@@ -71,16 +71,17 @@ export default {
   name: 'Menu',
   data() {
     return {
-      connected:this.connected,
+      prenom: this.database.user.name,
+      nom: this.database.user.lastname,
+      poste: this.database.user.poste,
+      link_img: this.database.user.profil_pic_link,
     };
 
 
   },
   props: {
     connected: "",
-    nom: "",
-    prenom: "",
-    poste: "",
+    database: "",
   },
   components: {
     Version
