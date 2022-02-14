@@ -1,17 +1,38 @@
 <template>
   <div v-if="database" class="page">
     <div class="titre">
-      <p style="font-size: 30px; font-weight: bold">{{$route.name}}</p>
+      <p style="font-size: 30px; font-weight: bold">{{ $route.name }}</p>
     </div>
-    <div class="content">
-      produits : {{allProduitsPrix}}
-      nombre de clients : {{nbClients}}
-      nombre de commandes : {{nbCommandes}}
-      nombre de produits : {{nbProduits}}
-      add all prix : {{allProduitsaddPrix}}
-    </div>
-    <div>
+    <div class="content" style="justify-content: center; align-items: center;">
+      <div class="infos_resume">
 
+        <div class="section_resume">
+          <div class="info_brf_container">
+            <div>Nombre de clients</div>
+            <div class="under_number">{{ nbClients }}</div>
+          </div>
+          <div class="info_brf_container">
+            <div>Nombre de commandes</div>
+            <div class="under_number">{{ nbCommandes }}</div>
+
+          </div>
+        </div>
+
+        <div class="section_resume">
+          <div class="info_brf_container">
+            <div>Nombre de produits</div>
+            <div class="under_number">{{ nbProduits }}</div>
+
+          </div>
+          <div class="info_brf_container">
+            <div>Total de tous les produits</div>
+            <div class="under_number">{{ TotalProduits }} €</div>
+
+          </div>
+        </div>
+<!--        <div class="infobox_btn_supp" style="width: max-content; height: 1rem" @click="ChangeConnexionStatus">Déconnexion</div>-->
+      </div>
+      <!--      <ProduitsPrix :database="database"/>-->
     </div>
   </div>
 
@@ -19,6 +40,8 @@
 </template>
 
 <script>
+import ProduitsPrix from '../components/ProduitsPrix.vue'
+
 export default {
   name: 'Home',
   data() {
@@ -26,14 +49,33 @@ export default {
       nbClients: this.database.clients.length,
       nbCommandes: this.database.contrats.length,
       nbProduits: this.database.produits.length,
-      allProduitsaddPrix: 0,
+      PRoduitsTotal: 0,
       allProduitsPrix: this.database.produits.map(produit => produit.prix),
+      TotalProduits: this.TotalPrixProduits(),
     }
+  },
+  components: {
+    ProduitsPrix
   },
   props: {
     database: "",
+    connected: "",
   },
-  methods: {}
+  methods: {
+    TotalPrixProduits() {
+      let total = 0;
+      this.database.produits.forEach(produit => {
+        total += parseInt(produit.prix);
+      })
+      return total;
+    },
+    ChangeConnexionStatus() {
+      this.$emit('ConnexionOnOff');
+    },
+  },
+  beforeMount() {
+    this.$emit('CheckConnexion');
+  },
 }
 </script>
 <style scoped>
@@ -59,61 +101,6 @@ export default {
   height: 100%;
   /*border: 1px solid #161a28;*/
   margin-bottom: 1rem;
-}
-
-.liste_items {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-height: 100vh;
-  margin: 0 2rem;
-  /*overflow: scroll;*/
-}
-
-.item {
-  display: flex;
-  max-height: 2rem;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-}
-
-.item_container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-bottom: 1rem;
-  padding: 0.3rem 1rem;
-  border-radius: 0.5rem;
-  background: #505050;
-  box-shadow: 0 10px 10px #232222;
-}
-
-.actions_item {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  width: 15%;
-}
-
-.infos_btn {
-  background-color: #232222;
-  color: #fff;
-  border: none;
-  height: 2rem;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-.infos_btn:active, .infos_btn:focus, .infos_btn:hover {
-  background-color: #2f3556;
-  transition-duration: 0.3s;
-}
-.item_description{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }
 
 </style>

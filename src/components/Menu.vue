@@ -1,14 +1,14 @@
 <template>
   <div class="menu-container">
     <div class="inside-container">
-      <img src="https://i.gifer.com/3Iga.gif" alt="user_image" class="user_image">
+      <img :src="link_img" alt="user_image" class="user_image">
       <div class="user">
         <div class="user_infos">
           <div>{{ prenom }}</div>
           &nbsp;
           <div>{{ nom }}</div>
         </div>
-        <div class="user_poste">
+        <div class="user_poste" style="margin-bottom: 0.5rem">
           {{ poste }}
         </div>
         <div style="font-size: 15px" class="btn_user_profile" :class="{user_active: $route.name=== 'Profil'}" @click="$router.push('/profil')"><i class="far fa-user" ></i></div>
@@ -16,7 +16,7 @@
       <span class="span-user"></span>
 
       <div class="menu">
-        <div class="menu-btn" :class="{active: $route.name=== 'Home'}" @click="$router.push('/');">
+        <div class="menu-btn" :class="{active: $route.name=== 'Home'}" @click="$router.push('/home');">
           <div style="margin-right: auto;" class="elpage">Home</div>
           <i class="fas fa-globe-europe" style="font-size: 20px"></i>
           &nbsp;&nbsp;
@@ -46,12 +46,10 @@
           <span class="span-active" :class="{span_visibility: $route.name=== 'Produits'}"></span>
         </div>
 
-        <div class="btn-login" :class="{btn_login_inactive: $route.name=== 'Produits'}">
-          <i class="fas fa-power-off" :class="{login_connected: login_status===true}"
-             style="font-size: 20px;"></i>
-          &nbsp;&nbsp;
-          &nbsp;
-          <div>{{ login_status }}</div>
+        <div class="btn-login" @click="ChangeConnexionStatus" :class="{btn_login_inactive: $route.name=== 'Produits'}">
+<!--          <i class="fas fa-power-off" :class="{login_connected: connected===true}" style="font-size: 20px;"></i>-->
+          <i class="fas fa-power-off" style="font-size: 20px;"></i>
+<!--          {{connected}}-->
 
         </div>
 
@@ -72,20 +70,27 @@ import Version from "@/components/Version";
 export default {
   name: 'Menu',
   data() {
-    return {};
+    return {
+      prenom: this.database.user.name,
+      nom: this.database.user.lastname,
+      poste: this.database.user.poste,
+      link_img: this.database.user.profil_pic_link,
+    };
 
 
   },
   props: {
-    login_status: "",
-    nom: "",
-    prenom: "",
-    poste: "",
+    connected: "",
+    database: "",
   },
   components: {
     Version
   },
-  methods: {},
+  methods: {
+    ChangeConnexionStatus(){
+      this.$emit('ConnexionOnOff');
+    },
+  },
 }
 
 </script>
@@ -174,16 +179,7 @@ export default {
   margin-bottom: 0.5rem;
 }
 
-.user_image {
-  margin-top: 1rem;
-  min-height: 5rem;
-  max-height: 5rem;
-  min-width: 5rem;
-  max-width: 5rem;
-  object-fit: cover;
-  margin-bottom: 0.5rem;
-  border-radius: 100%;
-}
+
 
 .btn-login {
   background: #29292a;
@@ -207,6 +203,10 @@ export default {
 
 .login_connected {
   color: #18ff00 !important;
+}
+.login_connected:hover, .login_connected:focus, .login_connected:active {
+  color: #18ff00 !important;
+  border-color: #18ff00 !important;
 }
 
 .user {

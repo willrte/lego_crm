@@ -218,7 +218,10 @@ export default {
       return this.database.collections.find(collection => collection.id === id).nom;
     },
 
-  }
+  },
+  beforeMount() {
+    this.$emit('CheckConnexion');
+  },
 }
 </script>
 <style scoped>

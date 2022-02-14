@@ -1,11 +1,13 @@
 <template>
   <div v-if="database" class="app">
 
-    <div class="menu">
-      <Menu :login_status="login_status_test" :nom="nom" :prenom="prenom" :poste="poste"/>
+    <div v-if="connected"   class="menu">
+      <Menu :database="database" :connected="connected" @ConnexionOnOff="ConnexionOnOff"  @UpdateDB="sendToDb"/>
     </div>
+
     <div class="pageActive">
-      <router-view v-slot="{ Component }" @UpdateDB="sendToDb" :database="database"></router-view>
+      <router-view v-slot="{ Component }" @CheckConnexion="CheckConnexion" @ConnexionOnOff="ConnexionOnOff"
+                   @UpdateDB="sendToDb" :database="database" :connected="connected"></router-view>
     </div>
   </div>
 
@@ -20,10 +22,7 @@ export default {
   data() {
     return {
       page_title: 'Lego CRM -',
-      login_status_test: 'Connexion',
-      prenom: 'William',
-      nom: 'Ratelade',
-      poste: 'UX/UI Designer',
+      connected: false,
       database: null,
       usernumber: 0,
     }
@@ -56,8 +55,30 @@ export default {
     suppelement() {
       this.database.client.splice(this.database.client.findIndex((client)=>client.id===this.usernumber),1)
       this.sendToDb()
-    }
-  }
+    },
+    ConnexionOnOff() {
+      if (this.connected) {
+        this.connected = false;
+        this.$router.push('/');
+      } else {
+        this.connected = true;
+        this.$router.push('/home');
+      }
+    },
+    CheckConnexion() {
+      if (this.connected !== true) {
+        this.$router.push('/');
+      }
+    },
+  },
+  // beforeMount() {
+  //   fetch('http://localhost:8082/api/get-db')
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         this.database = data;
+  //       })
+  // },
+
 }
 </script>
 <style>
@@ -301,7 +322,7 @@ html, body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 5rem;
+  width: 6rem;
   height: max-content;
   padding: 0.3rem 0.5rem;
   border-radius: 0.5rem;
@@ -346,5 +367,56 @@ html, body {
   width:50%;
   margin-right:1rem;
   justify-content: right;
+}
+.activated_box{
+  border: 2px solid #ffffff;
+}
+
+.info_brf_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #181818;
+  border-radius: 10px;
+  width: 90%;
+  height: 4rem;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.infos_resume {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.section_resume {
+  display: flex;
+  width: 100%;
+  justify-content: center
+}
+
+@media screen and (max-width: 1000px) {
+  .section_resume {
+    flex-direction: column;
+  }
+}
+
+.under_number {
+  font-weight: 700;
+  font-size: 30px;
+  color: #ff8080
+}
+.user_image {
+  margin-top: 1rem;
+  min-height: 5rem;
+  max-height: 5rem;
+  min-width: 5rem;
+  max-width: 5rem;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+  border-radius: 100%;
 }
 </style>

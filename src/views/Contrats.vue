@@ -25,9 +25,18 @@
             <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
               <div style="margin: 0.2rem auto 0 1rem ;">
                 <div style="height: 1.2rem">Date de la commande</div>
-                <div style="color: #7a7a7a; font-size: 12px;">Laisser vide pour la date du jour</div>
+                <div style="color: #7a7a7a; font-size: 12px;height: 1.5rem">Laisser vide pour la date du jour</div>
               </div>
               <input type="date" style="width: 50%" v-model="date_commande"
+                     placeholder="Laisser vide pour la date du jour">
+            </div>
+            <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
+              <div style="margin: 0.2rem auto 0 1rem ;">
+                <div style="height: 1.2rem">Date du paiement</div>
+                <div style="color: #7a7a7a; font-size: 12px;height: 0.8rem">Laisser vide pour </div>
+                <div style="color: #7a7a7a; font-size: 12px; height: 0.8rem">créer seulement un devis</div>
+              </div>
+              <input type="date" style="width: 50%" v-model="date_paiement"
                      placeholder="Laisser vide pour la date du jour">
             </div>
             <button @click="openShowProduitsContrat()" class="add_produit">Ajouter un produit</button>
@@ -66,8 +75,8 @@
               </div>
               <div style="margin-left: auto">Créé le :</div>&nbsp;
               <div class="date_container">{{ item.date_commande }}</div>&nbsp;
-              <div>Payé le :</div>&nbsp;
-              <div class="date_container">{{ item.date_paiement }}</div>
+              <div v-if="item.date_paiement">Payé le :</div>&nbsp;
+              <div v-if="item.date_paiement" class="date_container">{{ item.date_paiement }}</div>
             </div>
             <div class="item">
               <!--              <div style="font-size: 20px; font-weight: bold">{{ item.is_payed }}</div>&nbsp;-->
@@ -82,9 +91,11 @@
             <button @click="deleteElement(item.id)" class="infobox_btn_supp" style="margin-left: auto"><i
                 class="fa-solid fa-xmark"></i></button>
             <div v-if="item.showProduitsContrat">
-              <div class="infobox">
+
+              <div class="infobox" :class="{activated_box: item.date_paiement !== null }">
                 <div style="display: flex; align-items: center; margin-bottom: 1rem">
-                  <div>Détails du contrat N°&nbsp;</div>
+                  <div v-if="item.date_paiement !== null">Détails de la facture N°&nbsp;</div>
+                  <div v-else>Détails du devis N°&nbsp;</div>
                   <div class="date_container" style="border: 2px solid #af3232; padding: 0.2rem 0.5rem">{{ item.id }}
                   </div>
                   <button @click="closeEditor(item)" class="infobox_btn_close" style="margin-left: 1rem"><i
@@ -98,11 +109,12 @@
                 </div>
                 <div style="display: flex; width: 100%; margin-bottom: 0.5rem">
                   <div class="left_data_infos" style="color: #7a7a7a">Date de la commande</div>
-                  <div class="right_data_infos">{{ item.date_commande }}</div>
+                  <input type="date" style="width: 50%" v-model="item.date_commande"/>
                 </div>
                 <div v-if="item.date_paiement" style="display: flex; width: 100%; margin-bottom: 0.5rem">
-                  <div class="left_data_infos" style="color: #7a7a7a">Date de la commande</div>
-                  <div class="right_data_infos">{{ item.date_paiement }}</div>
+                  <!--                <div style="display: flex; width: 100%; margin-bottom: 0.5rem">-->
+                  <div class="left_data_infos" style="color: #7a7a7a">Date du paiement</div>
+                  <input type="date" style="width: 50%" v-model="item.date_paiement"/>
                 </div>
                 <div
                     style="display: flex; flex-direction: column;align-items: center;justify-content: center; width: 100%; margin-bottom: 0.5rem">
@@ -123,9 +135,16 @@
                   <div>Total de la commande : {{ calculTotal(item.id) }}€</div>
 
                 </div>
+                <div @click="transformToFacture(item)" v-if="item.date_paiement === null" class="infobox_btn_close"
+                     style="width: max-content; padding: 0.2rem 0.5rem; margin-bottom: 0.5rem">
+                  Devis payé
+                </div>
+
                 <button @click="closeAndSave(item)" class="infobox_btn_save">
                   Sauvegarder
                 </button>
+
+
               </div>
               <div class="allPageClick" @click="closeEditor(item)"></div>
             </div>
@@ -144,8 +163,8 @@ export default {
     return {
       id_client: '',
       produits_contrat: [],
-      date_commande: '',
-      date_paiement: '',
+      date_commande: this.currentDate(),
+      date_paiement: null,
       is_payed: false,
       showAjout: false,
       showProduitsContrat: false,
@@ -170,15 +189,25 @@ export default {
       this.showAjout = true
     },
     closeAjout() {
+      this.date_paiement = this.currentDate();
+      this.date_commande = null;
+      this.id_client = "";
       this.showAjout = false;
     },
+    transformToFacture(item) {
+      item.date_paiement = this.currentDate().toString();
+      this.$emit('UpdateDB');
+
+    },
     closeAndSaveAjout() {
-      if (this.nom !== '' && this.prix !== '' && this.collection_id !== '') {
+      if (this.date_paiement === null) {
+        this.date_paiement = null;
+      }
+      if (this.date_commande !== '') {
         this.showAjout = false;
-        this.addProduit()
-        this.nom = '';
-        this.prix = '';
-        this.collection_id = '';
+        this.addContrat()
+        this.date_commande = this.currentDate();
+        this.date_paiement = null;
       } else {
         alert('Veuillez remplir tous les champs')
       }
@@ -189,14 +218,17 @@ export default {
     closeShowProduitsContrat() {
       this.showProduitsContrat = false;
     },
-    addProduit() {
-      this.database.produits.push({
+    addContrat() {
+      if (this.date_paiement != null) {
+        this.date_paiement = this.date_paiement.toString();
+      }
+      this.database.contrats.push({
         id: this.generateIdContrat().toString(),
         // showOptions: false,
         id_client: this.id_client,
         produits_contrat: this.produits_contrat,
         date_commande: this.date_commande.toString(),
-        date_paiement: this.date_paiement.toString(),
+        date_paiement: this.date_paiement,
         is_payed: false,
       });
       this.$emit('UpdateDB');
@@ -208,7 +240,7 @@ export default {
     },
     generateIdContrat(longeurID = 8) {
       let result = '';
-      let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
       let charactersLength = characters.length;
       let i;
       for (i = 0; i < longeurID; i++) {
@@ -231,6 +263,7 @@ export default {
       let prix = this.database.produits.find(item => item.id === id).prix;
       return parseInt(prix);
     },
+
     calculTotal(id) {
       let total = 0;
       let i;
@@ -240,8 +273,17 @@ export default {
       }
       return total;
     },
+    currentDate() {
+      // const current = new Date();
+      // const ajdDate = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+      const ajdDate = new Date().toJSON().slice(0, 10);
+      return ajdDate.toString();
+    }
 
-  }
+  },
+  beforeMount() {
+    this.$emit('CheckConnexion');
+  },
 }
 </script>
 <style scoped>

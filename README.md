@@ -1,6 +1,9 @@
 # lego_crm
 
 ## Project setup
+
+:warning: **The lego_api project is necessary for the proper functioning of this project**
+
 ```
 npm install
 ```
