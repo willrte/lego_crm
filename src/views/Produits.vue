@@ -205,11 +205,10 @@ export default {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
 .ajout_item {
   display: flex;
 }
-
-
 
 .inputsecours{
   padding: 0.5rem 1rem;
