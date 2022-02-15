@@ -33,7 +33,7 @@ export default {
 
   },
   async mounted() {
-    await fetch('https://wizardly-hamilton-84a436.netlify.app/api/get-db')
+    await fetch('http://localhost:8085/api/get-db')
       .then(response => response.json())
       .then(data => {
         this.database = data;
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     sendToDb () {
-      fetch('https://wizardly-hamilton-84a436.netlify.app/api/update-db',{
+      fetch('http://localhost:8085/api/update-db',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export default {
     },
   },
   // beforeMount() {
-  //   fetch('http://localhost:8082/api/get-db')
+  //   fetch('http://localhost:8085/api/get-db')
   //       .then(response => response.json())
   //       .then(data => {
   //         this.database = data;
