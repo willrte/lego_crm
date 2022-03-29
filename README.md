@@ -2,7 +2,7 @@
 
 ## Project setup
 
-:warning: **The lego_api project is necessary for the proper functioning of this project**
+:warning: **The [https://github.com/willrte/lego_api]lego_api project is necessary for the proper functioning of this project**
 
 ```
 npm install
